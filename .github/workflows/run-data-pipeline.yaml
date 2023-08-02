@@ -2,7 +2,7 @@ name: Triggers Data pipeline
 
 on:
   schedule:
-    - cron: '20 13 * * *'
+    - cron: '26 18 * * *'
 
 jobs:
   run-data-pipeline:
@@ -23,11 +23,8 @@ jobs:
       - name: Pull Mage Docker image
         run: docker pull mageai/mageai:0.9.9
 
-      - name: Run Mage Docker image
-        run: docker run -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage start clcg-dataengineering
-
       - name: Execute Mage Pipeline
-        run: docker run -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage run /home/src github_actions
+        run: docker run -v $(pwd):/home/src mageai/mageai:0.9.9 /app/run_app.sh mage run /home/src github_actions
 
       # Using a main.py
       # - name: Pip install dependencies
