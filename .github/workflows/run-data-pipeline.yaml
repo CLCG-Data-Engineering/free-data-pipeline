@@ -2,7 +2,7 @@ name: Triggers Data pipeline
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Run every day at midnight
+    - cron: '55 10 * * *' # Run every day at midnight
 
 jobs:
   run-titanic:
