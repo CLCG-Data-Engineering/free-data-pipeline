@@ -2,10 +2,10 @@ name: Triggers Data pipeline
 
 on:
   schedule:
-    - cron: '55 11 * * *' # Run every day at midnight
+    - cron: '20 13 * * *'
 
 jobs:
-  run-titanic:
+  run-data-pipeline:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,7 @@ jobs:
         run: echo "$GCP_SERVICE_ACCOUNT" > bigquery-key.json
         shell: bash
         env:
-          - GCP_SERVICE_ACCOUNT: ${{secrets.GCP_SERVICE_ACCOUNT}}
+          GCP_SERVICE_ACCOUNT: ${{secrets.GCP_SERVICE_ACCOUNT}}
 
       # Using Mage
       - name: Pull Mage Docker image
