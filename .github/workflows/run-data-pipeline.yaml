@@ -2,7 +2,7 @@ name: Triggers Data pipeline
 
 on:
   schedule:
-    - cron: '55 10 * * *' # Run every day at midnight
+    - cron: '55 11 * * *' # Run every day at midnight
 
 jobs:
   run-titanic:
@@ -12,16 +12,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      # Make our GCP Service Account secrets available for this run
+      - name: Convert secrets to a file
+        run: echo "$GCP_SERVICE_ACCOUNT" > bigquery-key.json
+        shell: bash
+        env:
+          - GCP_SERVICE_ACCOUNT: ${{secrets.GCP_SERVICE_ACCOUNT}}
+
       # Using Mage
       - name: Pull Mage Docker image
-        run: docker pull mageai/mageai:latest
+        run: docker pull mageai/mageai:0.9.9
 
       - name: Run Mage Docker image
-        run: >
-          docker run -it -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage start clcg-dataengineering
+        run: docker run -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage start clcg-dataengineering
 
       - name: Execute Mage Pipeline
-        run: docker run -it -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage run /home/src github_actions
+        run: docker run -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage run /home/src github_actions
 
       # Using a main.py
       # - name: Pip install dependencies
