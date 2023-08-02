@@ -1,0 +1,31 @@
+name: Triggers Data pipeline
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run every day at midnight
+
+jobs:
+  run-titanic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Using Mage
+      - name: Pull Mage Docker image
+        run: docker pull mageai/mageai:latest
+
+      - name: Run Mage Docker image
+        run: >
+          docker run -it -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage start clcg-dataengineering
+
+      - name: Execute Mage Pipeline
+        run: docker run -it -v $(pwd):/home/src mageai/mageai /app/run_app.sh mage run /home/src github_actions
+
+      # Using a main.py
+      # - name: Pip install dependencies
+      #   run: pip install -r requirements.txt --upgrade pip
+      
+      # - name: Run python file
+      #   run: python main.py
