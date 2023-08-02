@@ -10,6 +10,7 @@ def parse_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @transformer
-def transform(data, *args, **kwargs):
-    df = parse_columns(data[0])
-    return [df, data[1]]
+def transform(df: pd.DataFrame, *args, **kwargs) -> pd.DataFrame:
+    """Retrieves the df and modifies the column names"""
+    df = parse_columns(df)
+    return df

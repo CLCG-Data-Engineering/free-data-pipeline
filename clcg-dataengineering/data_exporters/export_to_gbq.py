@@ -2,17 +2,18 @@ from mage_ai.settings.repo import get_repo_path
 from mage_ai.io.bigquery import BigQuery
 from mage_ai.io.config import ConfigFileLoader
 from os import path
+from pandas import DataFrame
 
 
 @data_exporter
-def export_data_to_big_query(data: list, *args, **kwargs) -> None:
+def export_data_to_big_query(df: DataFrame, *args, **kwargs) -> None:
     """
     Template for exporting data to a BigQuery warehouse.
     Specify your configuration settings in 'io_config.yaml'.
 
     Docs: https://docs.mage.ai/design/data-loading#bigquery
     """
-    df, table_name = data
+    table_name = kwargs["table_name"]
     print(table_name)
     
     table_id = f"clcg-dataengineering.emergencies.{table_name}"

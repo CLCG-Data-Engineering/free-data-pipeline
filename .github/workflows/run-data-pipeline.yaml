@@ -26,7 +26,7 @@ jobs:
         run: docker pull mageai/mageai:0.9.9
 
       - name: Execute Mage Pipeline
-        run: docker run -v $(pwd)/clcg-dataengineering:/home/src mageai/mageai:0.9.9 /app/run_app.sh mage run /home/src github_actions
+        run: docker run -v $(pwd)/clcg-dataengineering:/home/src mageai/mageai:0.9.9 python run_mage.py
 
       # Using a main.py
       # - name: Pip install dependencies

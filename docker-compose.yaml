@@ -2,8 +2,8 @@ version: '3'
 services:
   app:
     image: mageai/mageai:0.9.9
-    command: /app/run_app.sh mage start clcg-dataengineering
+    command: python run_mage.py
     ports:
       - 6789:6789
     volumes:
-      - ./:/home/src
+      - ./clcg-dataengineering:/home/src
