@@ -22,7 +22,7 @@ default:
   DRUID_PORT: 8082
   DRUID_SCHEME: http
   DRUID_USER: user
-  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/home/src/clcg-dataengineering/bigquery-key.json"
+  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/home/src/bigquery-key.json"
   GOOGLE_LOCATION: europe-west1 # Optional
   MONGODB_DATABASE: database
   MONGODB_HOST: host
