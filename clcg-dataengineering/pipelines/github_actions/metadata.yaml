@@ -1,0 +1,82 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dynamic: true
+  downstream_blocks:
+  - load_emergencies
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: endpoints
+  retry_config: null
+  status: executed
+  type: custom
+  upstream_blocks: []
+  uuid: endpoints
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - rename_columns
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_emergencies
+  retry_config: null
+  status: updated
+  type: data_loader
+  upstream_blocks:
+  - endpoints
+  uuid: load_emergencies
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_to_gbq
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: rename_columns
+  retry_config: null
+  status: updated
+  type: transformer
+  upstream_blocks:
+  - load_emergencies
+  uuid: rename_columns
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dynamic: false
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_to_gbq
+  retry_config: null
+  status: updated
+  type: data_exporter
+  upstream_blocks:
+  - rename_columns
+  uuid: export_to_gbq
+callbacks: []
+conditionals: []
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: github actions
+notification_config: {}
+retry_config: {}
+spark_config: {}
+tags: []
+type: python
+updated_at: '2023-08-02 13:16:16'
+uuid: github_actions
+widgets: []
