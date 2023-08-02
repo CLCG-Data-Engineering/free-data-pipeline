@@ -21,12 +21,14 @@ jobs:
         env:
           GCP_SERVICE_ACCOUNT: ${{secrets.GCP_SERVICE_ACCOUNT}}
 
+      - name: Check secrets
+        run: cat clcg-dataengineering/bigquery-key.json | jq -r '.client_id'
       # Using Mage
-      - name: Pull Mage Docker image
-        run: docker pull mageai/mageai:0.9.9
+      # - name: Pull Mage Docker image
+      #   run: docker pull mageai/mageai:0.9.9
 
-      - name: Execute Mage Pipeline
-        run: docker run -v $(pwd)/clcg-dataengineering:/home/src mageai/mageai:0.9.9 /app/run_app.sh mage run /home/src github_actions
+      # - name: Execute Mage Pipeline
+      #   run: docker run -v $(pwd)/clcg-dataengineering:/home/src mageai/mageai:0.9.9 /app/run_app.sh mage run /home/src github_actions
 
       # Using a main.py
       # - name: Pip install dependencies
