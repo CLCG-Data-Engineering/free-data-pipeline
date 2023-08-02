@@ -1,8 +1,10 @@
 name: Triggers Data pipeline
 
 on:
-  schedule:
-    - cron: '26 18 * * *'
+  push:
+    branch: main
+  # schedule:
+  #   - cron: '26 18 * * *'
 
 jobs:
   run-data-pipeline:
